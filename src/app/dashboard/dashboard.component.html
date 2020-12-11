@@ -1,0 +1,255 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">info_outline</i>
+                        </div>
+                        <p class="card-category">Requerimientos en espera</p>
+                        <h3 class="card-title">{{data.reqespera}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Entrada de productos</p>
+                        <h3 class="card-title">{{data.entradaProductos}}
+
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">content_copy</i>
+                        </div>
+                        <p class="card-category">Salida de productos</p>
+                        <h3 class="card-title">{{data.salidaProductos}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">store</i>
+                        </div>
+                        <p class="card-category">Cantidad de productos</p>
+                        <h3 class="card-title">{{data.cantidadProductos}}
+                        </h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-success">
+                        <div class="ct-chart" id="dailySalesChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Entradas semanales </h4>
+                        <p class="card-category">
+                            Entradas en esta semana</p>
+                    </div>
+                    <!--<div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">access_time</i> updated 4 minutes ago
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-danger">
+                        <div class="ct-chart" id="completedTasksChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Salidas semanales</h4>
+                        <p class="card-category">Salidas en esta semana</p>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-chart">
+                    <div class="card-header card-header-warning">
+                        <div class="ct-chart" id="websiteViewsChart"></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Total Existencias</h4>
+                        <p class="card-category">Existencias por mes</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs card-header-primary">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                <span class="nav-tabs-title">Requerimientos:</span>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#profile" mat-button>
+                                            <i class="material-icons">pause</i>En espera
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#messages" mat-button>
+                                            <i class="material-icons">check</i> Aceptados
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#settings" mat-button>
+                                            <i class="material-icons">highlight_off</i> Rechazados
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="profile">
+                                <table class="table">
+                                    <tbody>
+                                    <tr *ngFor="let b of data.listaRequerimientosEspera">
+                                        <td>
+                                            <span>{{b.codigo}}</span>
+                                        </td>
+                                        <td>{{b.getFechaEmision}}</td>
+                                        <td>{{b.almacenRequiere}}</td>
+                                        <td class="td-actions text-right">
+                                            <button [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" mat-raised-button
+                                                    matTooltip="Edit Task"
+                                                    type="button" (click)="verRequerimiento(b.codigoRequerimiento,b.condicionRequerimiento)">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="messages">
+                                <table class="table">
+                                    <tbody>
+                                    <tr *ngFor="let a of data.listaRequerimientosAceptado">
+                                        <td>
+                                            <span>{{a.codigo}}</span>
+                                        </td>
+                                        <td>{{a.getFechaEmision}}</td>
+                                        <td>{{a.almacenRequiere}}</td>
+
+
+                                        <td class="td-actions text-right">
+                                            <button [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" mat-raised-button
+                                                    matTooltip="Edit Task"
+                                                    type="button" (click)="verRequerimiento(a.codigoRequerimiento,a.condicionRequerimiento)">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane" id="settings">
+                                <table class="table">
+                                    <tbody>
+                                    <tr *ngFor="let c of data.listaRequerimientosRechazado">
+                                        <td>
+                                            <span>{{c.codigo}}</span>
+                                        </td>
+                                        <td>{{c.getFechaEmision}}</td>
+                                        <td>{{c.almacenRequiere}}</td>
+                                        <td class="td-actions text-right">
+                                            <button [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon" mat-raised-button
+                                                    matTooltip="Edit Task"
+                                                    type="button" (click)="verRequerimiento(c.codigoRequerimiento,c.condicionRequerimiento)">
+                                                <i class="material-icons">edit</i>
+                                            </button>
+
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-warning">
+                        <h4 class="card-title">Ultimos productos </h4>
+                        <p class="card-category">Productos agregados recientemente</p>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table table-hover">
+                            <thead class="text-warning">
+                            <th>Codigo</th>
+                            <th>Nombre</th>
+                            <th>Precio unitario</th>
+                            <th>Cantidad</th>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let ultimo of this.data.listaProductos">
+                                <td>{{ultimo.codigo}}
+                                </td>
+                                <td>{{ultimo.nombre}}
+                                </td>
+                                <td> {{ultimo.precioUnitario}}
+                                </td>
+                                <td>{{ultimo.cantidad}}</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

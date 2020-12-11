@@ -1,0 +1,204 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div (click)="confirmarOrden()" class="card-header card-header-danger" style="cursor:pointer;">
+                        <h4 class="card-title" style="text-align: center">Agregar Orden de Compra</h4>
+
+
+                    </div>
+
+                    <div class="card-body">
+                        <form [formGroup]="grupo">
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>RUC</h4>
+                                        <input formControlName="ruc"
+                                               matInput type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Nombre</h4>
+                                        <input formControlName="nombre" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Direccion</h4>
+                                        <input formControlName="direccion" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Correo</h4>
+                                        <input formControlName="correo" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Telefono</h4>
+                                        <input formControlName="telefono" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="fill" color="accent">
+                                        <h4>Fecha entrega</h4>
+                                        <input #entrega [matDatepicker]="picker1" formControlName="fechaEntrega"
+                                               matInput>
+
+                                        <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Direccion Entrega</h4>
+                                        <input formControlName="direccionEntrega" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Moneda</mat-label>
+                                        <mat-select [(ngModel)]="selectedValue" formControlName="monedas" name="moneda">
+                                            <mat-option *ngFor="let moneda of monedas" [value]="moneda">
+                                                {{moneda}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Condicion de pago</h4>
+                                        <input formControlName="condicionPago" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Forma de pag</h4>
+                                        <input formControlName="formaPago" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Observaciones</h4>
+                                        <input formControlName="observaciones" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Numero de comprobante</h4>
+                                        <input formControlName="numeroComprobante" matInput
+                                               type="text">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <app-search (producto)="buscar($event)" [idAlmacen]="selectedValue"></app-search>
+                                </div>
+                            </div>
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12">
+
+
+                <table [dataSource]="data" mat-table>
+                    <!-- All columns -->
+                    <ng-container *ngFor="let col of displayedColumnsfields;let i=index" [matColumnDef]="col">
+                        <th *matHeaderCellDef mat-header-cell> {{col}} </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input *ngIf="i>=0 && i<7;else otro" [formControl]="element.get(col)" arrow-div disabled>
+
+                            <ng-template #otro>
+
+                                <input  [formControl]="element.get(col)" arrow-div>
+                            </ng-template>
+                        </td>
+
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="borrar">
+                        <th *matHeaderCellDef mat-header-cell></th>
+                        <td *matCellDef="let element;let i=index;" mat-cell>
+                            <button (click)="delete(i)" arrow-div mat-button>delete</button>
+                        </td>
+                    </ng-container>
+
+
+                    <tr *matHeaderRowDef="displayedColumns " mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+                </table>
+
+
+            </div>
+            <div><br></div>
+        </div>
+    </div>
+</div>
+

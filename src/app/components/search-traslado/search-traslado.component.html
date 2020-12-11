@@ -1,0 +1,15 @@
+<p>
+    <mat-form-field>
+        <mat-select [formControl]="bankServerSideCtrl" placeholder="Productos">
+
+            <mat-option>
+                <ngx-mat-select-search [formControl]="bankServerSideFilteringCtrl" [noEntriesFoundLabel]="'no encontrado'"  [placeholderLabel]="'...'"
+
+                                       [searching]="searching"></ngx-mat-select-search>
+            </mat-option>
+            <mat-option *ngFor="let bank of filteredServerSideBanks | async" (click)="seleccionarProducto(bank)">
+                {{bank.codigo}}--{{bank.descripcion}}--{{bank.color}}--{{bank.talla}}--{{bank.modelo}}--{{bank.marca}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</p>

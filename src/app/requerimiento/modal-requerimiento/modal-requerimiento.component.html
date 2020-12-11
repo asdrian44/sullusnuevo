@@ -1,0 +1,244 @@
+<div class="main-content" style="width: 100%" *ngIf="this.rol==1">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div (click)="agregarRequerimientoNoStockCompra(entrega.value,obs.value)" *ngIf="this.rol==1"
+                         class="card-header card-header-danger"
+                         style="cursor: pointer">
+                        <h4 class="card-title" style="text-align: center">Agregar Requerimiento no stock compra</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <form>
+
+
+                            <mat-form-field *ngIf="selectedValue3==3" appearance="fill">
+                                <h4>Almacenes</h4>
+                                <mat-select #almacenes [(ngModel)]="selectedValue" name="tipo_almacenes">
+                                    <mat-option *ngFor="let op  of this.almacen " [value]="op.idAlmacen">
+                                        {{op.almacen}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+
+                            <h4>Tipo de requerimiento</h4>
+                            <mat-form-field appearance="fill">
+                                <mat-select [(ngModel)]="selectedValue3" name="tipo_requerimiento">
+                                    <mat-option *ngFor="let op  of requerimientos " [value]="op.id">
+                                        {{op.requerimiento ? op.requerimiento : 'Pedir a otro almacen'}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    <mat-form-field appearance="fill" color="accent">
+                                        <h4>Fecha entrega</h4>
+                                        <input #entrega [matDatepicker]="picker1" matInput>
+                                        <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Requerido por </h4>
+                                        <input disabled matInput type="text"
+                                               value="{{1}}">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Observaciones</h4>
+                                        <textarea #obs matInput
+                                                  value="{{1}}"></textarea>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+                            <div *ngIf="selectedValue3!=2" class="row">
+
+                                <div class="col-md-12">
+
+                                    <!--   <mat-form-field class="example-full-width">
+                                          <span>Buscar producto</span>
+                                          <input #buscador (keyup)="buscar(buscador.value)" matInput placeholder=""
+                                                 type="text">
+                                      </mat-form-field>
+                                      <div *ngIf="estadoBuscador==true">
+
+                                          <div (click)="seleccionarProducto(dato.idProducto,dato.nombre)"
+                                               *ngFor="let dato of datosBuscador"
+                                               style="cursor: pointer;padding-top: 20px;padding-bottom: 20px;">
+
+                                             <span>{{dato.nombre}}
+                                                 -{{dato.color}}-{{dato.marca}}-{{dato.modelo}}
+                                                 -{{dato.talla}}</span>
+
+                                          </div>
+
+                                      </div>-->
+                                    <app-search (producto)="buscar($event)" [idAlmacen]="selectedValue" *ngIf="this.selectedValue!=undefined" ></app-search>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+            estoy bien
+            </div>
+            <div *ngIf="selectedValue3!=2" class="col-md-12">
+                <table [dataSource]="dataSource" mat-table>
+                    <!-- All columns -->
+                    <ng-container *ngFor="let col of columnasNoStockCompraFields;let i=index" [matColumnDef]="col">
+                        <th *matHeaderCellDef mat-header-cell> {{col}} </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input [formControl]="element.get(col)" arrow-div *ngIf="i!=2;else elses">
+                            <ng-template #elses>
+                                <input  [formControl]="element.get(col)" *ngIf="i==2" type="number" min="1" max="{{element.get(col).value}}">
+                            </ng-template>
+
+
+
+                        </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="borrar">
+                        <th *matHeaderCellDef mat-header-cell></th>
+                        <td *matCellDef="let element;let i=index;" mat-cell>
+                            <button (click)="deleteNoStock(i)" arrow-div mat-button>delete</button>
+                        </td>
+                    </ng-container>
+
+
+                    <tr *matHeaderRowDef="columnasNoStockCompra " mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnasNoStockCompra;" mat-row></tr>
+                </table>
+            </div>
+
+            <div><br></div>
+        </div>
+        <div>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div class="main-content" style="width: 100%" *ngIf="this.rol!=1" #empleado>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+
+                    <div (click)="agregarRequerimientoGeneral(entrega.value,obs.value)"
+                         class="card-header card-header-danger"
+                         style="cursor: pointer">
+                        <h4 class="card-title" style="text-align: center">Agregar Requerimiento </h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <form>
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    <mat-form-field appearance="fill" color="accent">
+                                        <h4>Fecha entrega</h4>
+                                        <input #entrega [matDatepicker]="picker1" matInput >
+
+                                        <mat-datepicker-toggle [for]="picker1" matSuffix></mat-datepicker-toggle>
+                                        <mat-datepicker #picker1></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Observaciones</h4>
+                                        <textarea #obs matInput
+                                                  value="{{1}}"></textarea>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+                            <div *ngIf="selectedValue3!=2" class="row">
+
+                                <div class="col-md-12">
+
+                                    <app-search (producto)="buscar($event)" [idAlmacen]="selectedValue"></app-search>
+                                </div>
+                            </div>
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+            <div  class="col-md-12">
+                <table [dataSource]="dataSource" mat-table>
+                    <!-- All columns -->
+                    <ng-container *ngFor="let col of columnasNoStockCompraFields;let i=index" [matColumnDef]="col">
+                        <th *matHeaderCellDef mat-header-cell> {{col}} </th>
+                        <td *matCellDef="let element" mat-cell>
+                            <input [formControl]="element.get(col)" arrow-div>
+
+
+
+
+                        </td>
+                    </ng-container>
+
+
+                    <ng-container matColumnDef="borrar">
+                        <th *matHeaderCellDef mat-header-cell></th>
+                        <td *matCellDef="let element;let i=index;" mat-cell>
+                            <button (click)="deleteNoStock(i)" arrow-div mat-button>delete</button>
+                        </td>
+                    </ng-container>
+
+
+                    <tr *matHeaderRowDef="columnasNoStockCompra " mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: columnasNoStockCompra;" mat-row></tr>
+                </table>
+            </div>
+
+
+            <div><br></div>
+        </div>
+        <div>
+            <br>
+        </div>
+    </div>
+</div>
+

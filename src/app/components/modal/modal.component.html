@@ -1,0 +1,51 @@
+<div mat-dialog-content>
+
+
+    <ng-container *ngIf="'orden'==this.data.data;">
+
+
+        <app-orden-compra></app-orden-compra>
+
+    </ng-container>
+    <ng-container *ngIf="'requerimiento'==this.data.data;">
+
+        <app-modal-requerimiento></app-modal-requerimiento>
+
+
+    </ng-container>
+
+    <ng-container *ngIf="'detalles'==this.data.data;">
+
+        <app-modal-editar-requerimiento [idRequerimiento]="this.data.codigo" [op]="1"
+                                        [tipo]=this.data.tipo></app-modal-editar-requerimiento>
+    </ng-container>
+    <ng-container *ngIf="'detallesEditar'==this.data.data;">
+
+        <app-modal-editar-requerimiento [idRequerimiento]="this.data.codigo" [op]="3"></app-modal-editar-requerimiento>
+    </ng-container>
+
+    <ng-container *ngIf="'editar'==this.data.data">
+        <app-modal-editar-requerimiento [idRequerimiento]="this.data.codigo" [op]="2"></app-modal-editar-requerimiento>
+    </ng-container>
+
+    <ng-container *ngIf="'detalleSalida'==this.data.data">
+        <app-salida-modal [codigo]="this.data.codigo"></app-salida-modal>
+
+    </ng-container>
+
+    <ng-container *ngIf="'detalleEntrada'==this.data.data">
+
+        <app-entrada-modal [codigo]="this.data.codigo" [tipoEntrada]="this.data.tipo"></app-entrada-modal>
+
+
+    </ng-container>
+
+    <ng-container *ngIf="'ORDENESDETALLES'==this.data.data">
+
+
+        <app-ordenes-modal [codigo]="this.data.codigo"></app-ordenes-modal>
+
+    </ng-container>
+
+
+</div>

@@ -1,0 +1,203 @@
+<div class="main-content" style="width: 100%">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+
+                    <div  *ngIf="this.data.estadoMovimiento=='EN_ESPERA'" (click)="confirmarSalida()"
+                            class="card-header card-header-danger"
+                            style="cursor: pointer">
+                        <h4 class="card-title" style="text-align: center">Confirmar salida de productos</h4>
+
+                    </div>
+
+
+                    <div class="card-body">
+                        <form [formGroup]="grupo"  >
+                            <h4>Detalle de la salida</h4>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Codigo de la salida </h4>
+                                        <input disabled matInput type="text"
+                                               value="{{data.idSalida}}">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Almacen que solicito los productos</h4>
+                                        <input disabled matInput type="text"
+                                               value="{{data.almacenDestino.almacen}}">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Almacen de donde vienen los productos</h4>
+                                        <input  disabled matInput type="text"
+                                               value="{{data.almacenOrigen.almacen}}">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Fecha de pedido </h4>
+                                        <input  disabled matInput type="text"
+                                               value="{{data.requerimiento.fechaEmision}}">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Estado de la salida </h4>
+                                        <input  disabled matInput type="text"
+                                               value="{{data.movimiento}}">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Combustible</h4>
+                                        <input  [disabled]="this.data.movimiento!='EN_ESPERA'" matInput type="text"
+                                               value="{{data.combustible}}" formControlName="combustible">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4> Empresa</h4>
+                                        <input matInput type="text"
+                                               value="{{data.empresa}}"  formControlName="empresa">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Equipo</h4>
+                                        <input  matInput type="text"
+                                               value="{{data.equipo}}"  formControlName="equipo">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Modelo </h4>
+                                        <input  matInput type="text"
+                                               value="{{data.modelo}}"  formControlName="modelo">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Placa </h4>
+                                        <input  matInput type="text"
+                                                value="{{data.placa}}"  formControlName="placa">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <mat-form-field class="example-full-width">
+                                        <h4>Vale de salida </h4>
+                                        <input  matInput type="text"
+                                                value="{{data.valeSalida}}"  formControlName="valeSalida">
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+
+
+                        </form>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12">
+                <table [dataSource]="this.data.detalles" class="mat-elevation-z8" mat-table>
+
+
+                    <ng-container matColumnDef="idproduct">
+                        <th *matHeaderCellDef mat-header-cell> Codigo Producto</th>
+                        <td *matCellDef="let element" mat-cell> {{element.idProducto.codigo}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="nombre">
+                        <th *matHeaderCellDef mat-header-cell> Nombre Producto</th>
+                        <td *matCellDef="let element" mat-cell> {{element.idProducto.descripcion +"-"+ element.idProducto.modelo +"-" +element.idProducto.marca+"-" +element.idProducto.color+"-" +element.idProducto.talla }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="cantidad">
+                        <th *matHeaderCellDef mat-header-cell> Cantidad Producto</th>
+                        <td *matCellDef="let element" mat-cell> {{element.cantidad}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="tipoProducto">
+                        <th *matHeaderCellDef mat-header-cell> Tipo Producto</th>
+                        <td *matCellDef="let element" mat-cell> {{element.idProducto.tipo.tipo}} </td>
+                    </ng-container>
+
+
+
+
+
+
+
+
+                    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+                </table>
+            </div>
+
+
+
+            <div><br></div>
+        </div>
+        <div>
+            <br>
+        </div>
+    </div>
+</div>
+
+
+

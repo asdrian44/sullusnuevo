@@ -1,0 +1,157 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Mis Salidas</h4>
+                        <p class="card-category"> Lista de salidas realizadas por este almacen</p>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    id Salida
+                                </th>
+                                <th>
+                                    Almacen
+                                </th>
+
+
+                                <th>
+                                    Estado de la salida
+                                </th>
+                                <th>
+                                    Fecha de la salida
+                                </th>
+
+
+
+
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let dat of datos2">
+                                    <td>
+                                        {{dat.idSalida}}
+
+                                    </td>
+                                    <td>
+                                        {{dat.almacenOrigen.almacen}}
+
+                                    </td>
+
+                                    <td>
+                                        {{dat.movimiento}}
+                                    </td>
+                                    <td>
+                                        {{dat.fechaSalida}}
+                                    </td>
+
+                                    <td>
+                                        <i (click)="verDetalleSalida('detalleSalida',dat.idSalida)"
+                                           class="fas fa-search"></i>
+
+                                    </td>
+                                    <td>
+                                    <i class="fas fa-pencil-alt"></i>
+
+                                    </td>
+
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Mis Entradas</h4>
+                        <p class="card-category"> Lista de entradas realizidas por este almacen</p>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    id Entrada
+                                </th>
+
+
+                                <th>
+                                    Fecha de entrada
+                                </th>
+                                <th>
+                                    Estado de la entrada
+                                </th>
+                                <th>
+                                    Tipo Comprobante
+
+                                </th>
+                                <th>
+                                    Detalles
+                                </th>
+
+
+
+                                <th>
+                                    Eliminar
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let dat of datos">
+                                    <td>
+                                        {{dat.idEntrada}}
+
+                                    </td>
+
+
+                                    <td>
+                                        {{dat.idRequerimiento.fechaEntrega}}
+
+                                    </td>
+                                    <td>
+                                        {{dat.movimiento}}
+                                    </td>
+
+                                    <td>
+                                        {{dat.tipoComprobante}}
+                                    </td>
+
+
+                                    <td>
+                                        <i (click)="verDetallesEntrada('detalleEntrada',dat.idEntrada,dat.tipoEntrada)"
+                                           class="fas fa-search"></i>
+
+                                    </td>
+
+
+                                    <td>
+
+                                        <i class="fas fa-trash-alt"></i>
+
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

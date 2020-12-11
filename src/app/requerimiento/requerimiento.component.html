@@ -1,0 +1,189 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="container">
+            <div class="item punk">
+
+                <button (click)="agregaRequerimiento()" class="addButton"><i class="fas fa-plus"></i></button>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Mis requerimientos</h4>
+                        <p class="card-category"> Lista de requerimientos realizidas por este almacen</p>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    Codigo de Requerimiento
+                                </th>
+                                <th>
+                                    Empleado
+                                </th>
+
+                                <th>
+                                    Fecha de emision
+                                </th>
+                                <th>
+                                    Tipo de Requerimiento
+                                </th>
+                                <th>
+                                    Estado de requerimiento
+                                </th>
+                                <th>
+                                    Detalles
+                                </th>
+                                <th>
+                                    Editar
+
+                                </th>
+                                <th>
+                                    Eliminar
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let dat of datos;">
+                                    <td>
+                                        {{dat.codigoRequerimiento}}
+
+                                    </td>
+                                    <td>
+                                        {{dat.requeridoPor.email}}
+
+                                    </td>
+
+                                    <td>
+                                        {{dat.fechaEmision}}
+
+                                    </td>
+                                    <td>
+                                        {{dat.tipoRequerimiento}}
+                                    </td>
+                                    <td class="text-primary">
+                                        {{dat.estadoRequerimiento}}
+                                    </td>
+                                    <td>
+                                        <i (click)="editarRequerimiento('detalles',dat.codigoRequerimiento,dat.tipoRequerimiento)"
+                                           class="fas fa-search"></i>
+
+                                    </td>
+                                    <td>
+
+                                        <i (click)="verRequerimiento('editar',dat.codigoRequerimiento,dat.tipoRequerimiento)"
+                                           class="fas fa-pencil-alt"></i>
+
+                                    </td>
+
+                                    <td>
+
+                                        <i class="fas fa-trash-alt"></i>
+
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" *ngIf="this.rol==2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Peticiones de requerimientos</h4>
+                        <p class="card-category"> Lista de requerimientos realizidas por este almacen</p>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    Codigo de Requerimiento
+                                </th>
+                                <th>
+                                    Remitente
+                                </th>
+
+                                <th>
+                                    Fecha de emision
+                                </th>
+                                <th>
+                                    Tipo de Requerimiento
+                                </th>
+                                <th>
+                                    Estado de requerimiento
+                                </th>
+                                <th>
+                                    Detalles
+                                </th>
+                                <th>
+                                    Editar
+
+                                </th>
+                                <th>
+                                    Eliminar
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let dat of datos2">
+                                    <td>
+                                        {{dat.codigoRequerimiento}}
+
+                                    </td>
+                                    <td>
+                                        {{dat.idSolicitante.email}}
+
+                                    </td>
+
+                                    <td>
+                                        {{dat.fechaEmision}}
+
+                                    </td>
+                                    <td>
+                                        {{dat.condicionRequerimiento}}
+                                    </td>
+                                    <td class="text-primary">
+                                        {{dat.estadoReq}}
+                                    </td>
+                                    <td>
+                                        <i (click)="editarRequerimiento('detallesEditar',dat.codigoRequerimiento)"
+                                           class="fas fa-search"></i>
+
+                                    </td>
+                                    <td>
+
+                                        <i (click)="verRequerimiento('editar',dat.codigoRequerimiento)"
+                                           class="fas fa-pencil-alt"></i>
+
+                                    </td>
+
+                                    <td>
+
+                                        <i class="fas fa-trash-alt"></i>
+
+                                    </td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

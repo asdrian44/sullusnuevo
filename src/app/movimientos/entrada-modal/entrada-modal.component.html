@@ -1,0 +1,373 @@
+<ng-container *ngIf="tipoEntrada==1">
+
+    <div class="main-content" style="width: 100%">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+
+                        <div (click)="confirmarEntrada()" *ngIf="this.data.data.estadoMovimiento=='EN_ESPERA'"
+                             class="card-header card-header-danger"
+                             style="cursor: pointer">
+                            <h4 class="card-title" style="text-align: center">Confirmar Entrada de productos</h4>
+
+                        </div>
+
+
+                        <div class="card-body">
+                            <form>
+                                <h4>Detalle de la Entrada</h4>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Codigo de la Entrada </h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.data.idEntrada}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Estado de movimiento </h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.data.estadoMovimiento}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Numero de comprobante </h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.data.numeroComprobante}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Numero de Orden de Compra </h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.numeroComprobante}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Proveedor</h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.data.numeroComprobante}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Tipo Comprobante</h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.data.tipoComprobante}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Vale Ingreso</h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.data.valeIngreso}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+
+                                        <h4>Empleado que ingreso los productos</h4>
+
+
+                                        <select (change)="seleccionarUsuario($event.target.value)" style="width: 100%">
+                                            <option
+                                                    *ngFor="let ad of listaEmpleado"
+                                                    value="{{ad.iduser}}">{{ad.usuario}}</option>
+
+
+                                        </select>
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </form>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                FLTA FILTRAR LA TABLA CUANDO NO EXISTE LA ENTRADA
+                <div
+                     class="col-md-12">
+                    <table [dataSource]="this.data.data2" class="mat-elevation-z8" mat-table style="width: 100%">
+
+
+                        <ng-container matColumnDef="item">
+                            <th *matHeaderCellDef mat-header-cell> Item</th>
+                            <td *matCellDef="let element; let i =index" mat-cell> {{i + 1}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="nombre">
+                            <th *matHeaderCellDef mat-header-cell> Nombre</th>
+                            <td *matCellDef="let element" mat-cell> {{element.nombre}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="talla">
+                            <th *matHeaderCellDef mat-header-cell> Talla</th>
+                            <td *matCellDef="let element" mat-cell> {{element.talla}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="marca">
+                            <th *matHeaderCellDef mat-header-cell> Marca</th>
+                            <td *matCellDef="let element" mat-cell> {{element.marca}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="color">
+                            <th *matHeaderCellDef mat-header-cell> Color</th>
+                            <td *matCellDef="let element" mat-cell> {{element.color}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="modelo">
+                            <th *matHeaderCellDef mat-header-cell> Modelo</th>
+                            <td *matCellDef="let element" mat-cell> {{element.modelo}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="unidadMedida">
+                            <th *matHeaderCellDef mat-header-cell> Medida</th>
+                            <td *matCellDef="let element" mat-cell> {{element.unidadMedida}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="cantidad">
+                            <th *matHeaderCellDef mat-header-cell> Cantidad</th>
+                            <td *matCellDef="let element" mat-cell> {{element.cantidad}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="total">
+                            <th *matHeaderCellDef mat-header-cell> Total</th>
+                            <td *matCellDef="let element" mat-cell> {{element.subTotal}} </td>
+                        </ng-container>
+
+
+                        <tr *matHeaderRowDef="columnasCompra" mat-header-row></tr>
+                        <tr *matRowDef="let row; columns: columnasCompra;" mat-row></tr>
+                    </table>
+                </div>
+
+
+                <div><br></div>
+            </div>
+            <div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+
+</ng-container>
+
+
+<ng-container>
+
+    <div  class="main-content" style="width: 100%">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+
+                        <div (click)="confirmarEntradaTraslado()" *ngIf="this.data.movimiento=='EN_CAMINO'"
+                             class="card-header card-header-danger"
+                             style="cursor: pointer">
+                            <h4 class="card-title" style="text-align: center">Confirmar Entrada de productos</h4>
+
+                        </div>
+
+
+                        <div class="card-body">
+                            <form>
+                                <h4>Detalle de la Entrada</h4>
+
+
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Estado de movimiento </h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.movimiento}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Tipo Comprobante</h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.tipoComprobante}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Vale Ingreso </h4>
+                                            <input disabled matInput type="text"
+                                                   value="{{data.valeIngreso}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Almacen que envio los productos</h4>
+                                            <input disabled
+                                                   matInput
+                                                   type="text" value="{{data.idRequerimiento.almacenRecibe.almacen}}">
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+
+                                        <mat-form-field class="example-full-width">
+                                            <h4>Observaciones</h4>
+                                            <textarea disabled matInput>
+                                            {{data.observaciones}}
+                                        </textarea>
+                                        </mat-form-field>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+
+
+                                         <!---
+                                            <h4>Empleado que ingreso los productos</h4>
+
+
+                                            <select (change)="seleccionarUsuario($event.target.value)" >
+                                                <option
+                                                        *ngFor="let ad of listaEmpleado"
+                                                        value="{{ad.iduser}}">{{ad.usuario}}</option>
+
+
+                                            </select>-->
+
+
+
+                                    </div>
+
+                                </div>
+
+
+                            </form>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12">
+                    <table [dataSource]="this.data.detalles" class="mat-elevation-z8" mat-table
+                           style="width: 100%">
+
+
+                        <ng-container matColumnDef="item">
+                            <th *matHeaderCellDef mat-header-cell> Item</th>
+                            <td *matCellDef="let element; let i =index" mat-cell> {{i + 1}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="nombre">
+                            <th *matHeaderCellDef mat-header-cell> Nombre</th>
+                            <td *matCellDef="let element" mat-cell> {{element.idProduct.descripcion}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="talla">
+                            <th *matHeaderCellDef mat-header-cell> Talla</th>
+                            <td *matCellDef="let element" mat-cell> {{element.idProduct.talla}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="marca">
+                            <th *matHeaderCellDef mat-header-cell> Marca</th>
+                            <td *matCellDef="let element" mat-cell> {{element.idProduct.marca}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="color">
+                            <th *matHeaderCellDef mat-header-cell> Color</th>
+                            <td *matCellDef="let element" mat-cell> {{element.idProduct.color}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="modelo">
+                            <th *matHeaderCellDef mat-header-cell> Modelo</th>
+                            <td *matCellDef="let element" mat-cell> {{element.idProduct.modelo}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="unidadMedida">
+                            <th *matHeaderCellDef mat-header-cell> Medida</th>
+                            <td *matCellDef="let element" mat-cell> {{element.idProduct.unidadMedida}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="cantidad">
+                            <th *matHeaderCellDef mat-header-cell> Cantidad</th>
+                            <td *matCellDef="let element" mat-cell> {{element.cantidad}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="total">
+                            <th *matHeaderCellDef mat-header-cell> Total</th>
+                            <td *matCellDef="let element" mat-cell> {{element.total}} </td>
+                        </ng-container>
+
+
+                        <tr *matHeaderRowDef="columnasTraslado" mat-header-row></tr>
+                        <tr *matRowDef="let row; columns: columnasTraslado;" mat-row></tr>
+                    </table>
+                </div>
+
+
+                <div><br></div>
+            </div>
+            <div>
+                <br>
+            </div>
+        </div>
+    </div>
+
+</ng-container>

@@ -1,0 +1,60 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <app-sticky [nameComponent]="'orden'"></app-sticky>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Ordenes de Compra</h4>
+                        <p class="card-category"> Lista de Ordenes de compra</p>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    Nº Orden
+                                </th>
+                                <th>
+                                    Fecha de la orden
+                                </th>
+
+                                <th>
+                                    Estado de la orden
+                                </th>
+                                <th>
+                                    Codigo Requerimiento
+                                </th>
+
+
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let d of data">
+                                    <td>
+                                        {{d.numeroOrden}}
+
+                                    </td>
+                                    <td>{{d.fechaOrden}}</td>
+                                    <td>{{d.estado}}</td>
+                                    <td>{{d.idRequerimiento.codigoRequerimiento}}</td>
+
+                                    <td>
+                                        <i (click)="detallesOrden(d.numeroOrden)"
+                                           class="fas fa-search"></i>
+
+                                    </td>
+
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

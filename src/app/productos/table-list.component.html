@@ -1,0 +1,84 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Productos</h4>
+                        <p class="card-category"> Lista de productos</p>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+
+                            <mat-form-field>
+                                <mat-label>Buscar</mat-label>
+                                <input #input (keyup)="applyFilter($event)" matInput>
+                            </mat-form-field>
+
+                            <div class="mat-elevation-z8">
+                                <table [dataSource]="this.dataSource" mat-table matSort>
+
+
+                                    <ng-container matColumnDef="item">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Item</th>
+                                        <td *matCellDef="let row; let i = index" mat-cell> {{i + 1}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="codigo">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Codigo</th>
+                                        <td *matCellDef="let row; let i = index" mat-cell> {{row.codigo}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="descripcion">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> Descripcion</th>
+                                        <td *matCellDef="let row; let i = index" mat-cell> {{row.descripcion}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="marca">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> marca</th>
+                                        <td *matCellDef="let row; let i = index" mat-cell> {{row.marca}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="modelo">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> modelo</th>
+                                        <td *matCellDef="let row; let i = index" mat-cell> {{row.modelo}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="color">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> color</th>
+                                        <td *matCellDef="let row; let i = index" mat-cell> {{row.color}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="talla">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> talla</th>
+                                        <td *matCellDef="let row; let i = index" mat-cell> {{row.talla}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="tipo">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> tipo</th>
+                                        <td *matCellDef="let row; let i = index"
+                                            mat-cell> {{row.tipo.tipoProducto}} </td>
+                                    </ng-container>
+                                    <ng-container matColumnDef="precio">
+                                        <th *matHeaderCellDef mat-header-cell mat-sort-header> precio</th>
+                                        <td *matCellDef="let row; let i = index" mat-cell> {{row.precio}} </td>
+                                    </ng-container>
+
+
+                                    <tr *matHeaderRowDef="columnas" mat-header-row></tr>
+                                    <tr *matRowDef="let row; columns: columnas;" mat-row></tr>
+
+                                    <!-- Row shown when there is no matching data. -->
+                                    <tr *matNoDataRow class="mat-row">
+                                        <td class="mat-cell" colspan="4">Productos no encontrados "{{input.value}}"
+                                        </td>
+                                    </tr>
+                                </table>
+
+                                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" label="Productos por pagina" ></mat-paginator>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
